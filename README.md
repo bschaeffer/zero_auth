@@ -18,8 +18,29 @@ Or install it yourself as:
 
 ## Usage
 
-Coming Soon...
+### Models
 
+#### `ZeroAuth::Model::Password`
+
+* Provides password salting and hashing using `BCrypt`.
+* Instance method authentication.
+* **Requires** `password_salt` and `password_hash` attributes.
+
+```ruby
+class User
+  include ZeroAuth::Model::Password
+  attr_accessor :password_salt, :password_hash
+end
+
+user = User.new
+user.password = 'password'
+
+user.password_salt # => BCrypt::Engine.generate_salt
+user.password_hash # => BCrypty::Password
+
+user.has_password?('password') # => true
+user.has_password?('pa$$w0rD') # => false
+```
 
 ## Contributing
 
