@@ -39,7 +39,7 @@ user = User.new
 user.password = 'password'
 
 user.password_salt # => BCrypt::Engine.generate_salt
-user.password_hash # => BCrypty::Password
+user.password_hash # => BCrypt::Password
 
 user.has_password?('password') # => true
 user.has_password?('pa$$w0rD') # => false
