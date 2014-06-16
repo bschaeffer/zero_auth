@@ -2,6 +2,8 @@
 
 **Zero configuration** authentication starter for your Rails project.
 
+* Docs: http://rdoc.info/github/bschaeffer/zero_auth
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,6 +24,7 @@ Or install it yourself as:
 
 #### `ZeroAuth::Model::Password`
 
+* Docs: http://rdoc.info/github/bschaeffer/zero_auth/ZeroAuth/Model/Password
 * Provides password salting and hashing using `BCrypt`.
 * Instance method authentication.
 * **Requires** `password_salt` and `password_hash` attributes.
@@ -40,6 +43,36 @@ user.password_hash # => BCrypty::Password
 
 user.has_password?('password') # => true
 user.has_password?('pa$$w0rD') # => false
+
+user.authenticate!('password') # => true
+user.authenticate!('pa$$word') # => raises ZeroAuth::Unauthorized
+```
+
+##### Rails Setup
+
+```ruby
+# migration
+change_table :users do |t|
+  t.string :password_salt, null: false, default: ""
+  t.string :password_hash, null: false, default: ""
+end
+
+# model
+class User < ActiveRecord::Base
+  include ZeroAuth::Model::Password
+end
+```
+
+##### MongoMapper Setup
+
+```ruby
+class User < ActiveRecord::Base
+  include MongoMapper::Document
+  include ZeroAuth::Model::Password
+
+  key :password_salt, String
+  key :password_hash, String
+end
 ```
 
 ## Contributing

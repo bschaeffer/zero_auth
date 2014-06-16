@@ -46,6 +46,9 @@ module ZeroAuth
     # user = User.create(email: 'email@me.com', password: 'password')
     # user.has_password?('password') # => true
     # user.has_password?('pa$$w0rD') # => false
+    #
+    # user.authenticate!('password') # => true
+    # user.authenticate!('pa$$word') # => raises ZeroAuth::Unauthorized
     # ```
     #
     # ### Implementing Validations
@@ -80,16 +83,16 @@ module ZeroAuth
     #
     # ### Customize Authentication Class Method
     #
-    # The {ZeroAuth::Model::Password} module leaves record retreival and exact
-    # the authentication tree up to the developer, but implementing a custom
-    # class method is trivial. An example using `ActiveRecord` might looks
+    # The {ZeroAuth::Model::Password} module leaves record retreival and the
+    # exact the authentication tree up to the developer, but implementing a
+    # custom class method is trivial. An example using `ActiveRecord` might look
     # something like this:
     #
     # ```ruby
     # class User < ActiveRecord::Base
     #   include ZeroAuth::Model::Password
     #
-    #   def sef.authenticate(email, password)
+    #   def self.authenticate(email, password)
     #     begin
     #       self.authenticate!(email, password)
     #     rescue ZeroAuth::Unauthorized
@@ -99,12 +102,7 @@ module ZeroAuth
     #   def self.authenticate!(email, password)
     #     begin
     #       record = self.find_by!(email: email)
-    #
-    #       unless record && record.has_password?(password)
-    #         fail ZeroAuth::Unauthorized
-    #       end
-    #
-    #       record
+    #       record.authenticate!(password) && record
     #     rescue ActiveRecord::RecordNotFound
     #       fail ZeroAuth::Unauthorized
     #     end
@@ -154,6 +152,18 @@ module ZeroAuth
       def requires_password?
         is_new = (respond_to?(:new_record?) && new_record?)
         is_new || !ZeroAuth::Utils.empty?(password_hash)
+      end
+
+      # A helper method that takes a given password and raises a
+      # {ZeroAuth::Unauthorized} error if the call to `has_password?` fails.
+      #
+      # @params password [String] password to test
+      #
+      # @return [Nil]
+      # @raise {ZeroAuth::Unauthorized} if the given password is not valid
+      #
+      def authenticate!(test_password)
+        has_password?(test_password) || fail(ZeroAuth::Unauthorized)
       end
 
       # Compares the given password with the current password attributes using

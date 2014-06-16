@@ -48,6 +48,18 @@ RSpec.describe ZeroAuth::Model::Password do
     end
   end
 
+  describe "#authenticate!" do
+    it "raises a ZeroAuth::Unauthorized error for an invalid password" do
+      user.password = "password"
+      expect{user.authenticate!("other")}.to raise_error(ZeroAuth::Unauthorized)
+    end
+
+    it "returns true for a valid password" do
+      user.password = "password"
+      expect(user.authenticate!("password")).to eq(true)
+    end
+  end
+
   describe "#requires_password?" do
     let(:password) { nil }
     before { user.password = password }
