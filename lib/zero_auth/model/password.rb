@@ -44,6 +44,7 @@ module ZeroAuth
     # end
     #
     # user = User.create(email: 'email@me.com', password: 'password')
+    #
     # user.has_password?('password') # => true
     # user.has_password?('pa$$w0rD') # => false
     #
@@ -84,7 +85,7 @@ module ZeroAuth
     # ### Customize Authentication Class Method
     #
     # The {ZeroAuth::Model::Password} module leaves record retreival and the
-    # exact the authentication tree up to the developer, but implementing a
+    # exact authentication tree up to the developer, but implementing a
     # custom class method is trivial. An example using `ActiveRecord` might look
     # something like this:
     #
