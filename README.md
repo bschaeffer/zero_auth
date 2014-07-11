@@ -1,4 +1,4 @@
-# ZeroAuth [![Build Status](https://travis-ci.org/bschaeffer/zero_auth.svg?branch=master)](https://travis-ci.org/bschaeffer/zero_auth)
+# ZeroAuth [![Build Status](https://travis-ci.org/bschaeffer/zero_auth.svg?branch=master)](https://travis-ci.org/bschaeffer/zero_auth) [![Inline docs](http://inch-ci.org/github/bschaeffer/zero_auth.png?branch=master)](http://inch-ci.org/github/bschaeffer/zero_auth)
 
 **Zero configuration** authentication starter for your Rails project.
 
