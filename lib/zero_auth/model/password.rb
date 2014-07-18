@@ -136,6 +136,7 @@ module ZeroAuth
       #
       def password=(unencrypted_password)
         if unencrypted_password.nil?
+          @password = nil
           self.password_salt = nil
           self.password_hash = nil
         else
