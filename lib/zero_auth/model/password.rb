@@ -153,7 +153,7 @@ module ZeroAuth
       #
       def requires_password?
         is_new = (respond_to?(:new_record?) && new_record?)
-        is_new || !ZeroAuth::Utils.empty?(password_hash)
+        is_new || !ZeroAuth::Utils.empty?(password)
       end
 
       # A helper method that takes a given password and raises a
