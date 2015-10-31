@@ -121,6 +121,7 @@ module ZeroAuth
     module Password
 
       # Calls `attr_reader :password` on the including class.
+      # @!visibility private
       #
       def self.included(base)
         base.class_eval { attr_reader :password }
