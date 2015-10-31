@@ -9,8 +9,8 @@ module ZeroAuth
       BCrypt::Engine.generate_salt
     end
 
-    # Generates a `BCrypt::Password` with a hard-coded cost of **9** (which
-    # will probably change soon).
+    # Generates a `BCrypt::Password` using the `password_cost` configuration
+    # value.
     #
     # @param password [String] the given password
     # @param salt [Sting] the password salt
@@ -18,7 +18,8 @@ module ZeroAuth
     # @return [BCrypt::Password]
     #
     def self.create(password, salt)
-      BCrypt::Password.create("#{password}#{salt}", cost: 9)
+      cost = ZeroAuth.config.password_cost
+      BCrypt::Password.create("#{password}#{salt}", cost: cost)
     end
 
     # Compares a given encrypted password and the salt used to generate it with

@@ -9,6 +9,13 @@ RSpec.describe ZeroAuth::Password do
   end
 
   describe ".create" do
+    it 'creates the password correctly' do
+      expect(BCrypt::Password).to receive(:create)
+        .with("passwordsalt", {cost: ZeroAuth.config.password_cost})
+
+      ZeroAuth::Password.create("password", "salt")
+    end
+
     it "returns a BCrypt::Password" do
       password = ZeroAuth::Password.create("password", "salt")
       expect(password).to be_a(BCrypt::Password)

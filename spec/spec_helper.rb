@@ -19,4 +19,8 @@ RSpec.configure do |config|
     mocks.syntax = :expect
     mocks.verify_partial_doubles = true
   end
+
+  config.after(:each) do
+    ZeroAuth.config.reset!
+  end
 end
