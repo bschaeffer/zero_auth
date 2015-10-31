@@ -1,5 +1,8 @@
 require 'bcrypt'
 
+# Provides general helper methods used throughout the ZeroAuth library.
+# @since 0.0.1
+#
 module ZeroAuth
   class Utils
 

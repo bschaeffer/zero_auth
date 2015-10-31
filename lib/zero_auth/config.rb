@@ -1,7 +1,11 @@
+# Holds configuration values for the ZeroAuth library.
+#
 module ZeroAuth
   class Config
+
     # @return [Integer] The cost param when generating BCrypt passwords.
     #   Defaults to 9.
+    #
     attr_accessor :password_cost
 
     def initialize

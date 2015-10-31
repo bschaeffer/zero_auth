@@ -1,16 +1,20 @@
 require 'bcrypt'
 
+# Provides helper methods for generating and comparing BCrypt passwords
+#
 module ZeroAuth
   class Password
 
-    # @return [String] a salt created by `BCrypt::Engine.generate_salt`
+    # Generates a password salt using `BCrypt::Engine.generate_salt`
+    #
+    # @return [String] the password salt
     #
     def self.generate_salt
       BCrypt::Engine.generate_salt
     end
 
-    # Generates a `BCrypt::Password` using the `password_cost` configuration
-    # value.
+    # Generates a `BCrypt::Password` using they {ZeroAuth::Config#password_cost}
+    # configuration value.
     #
     # @param password [String] the given password
     # @param salt [Sting] the password salt
