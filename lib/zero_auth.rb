@@ -3,7 +3,6 @@ require 'zero_auth/version'
 require 'zero_auth/config'
 
 # Namespace for the ZeroAuth library
-# @since 0.0.1
 #
 module ZeroAuth
   autoload :Utils, 'zero_auth/utils'

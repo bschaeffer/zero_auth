@@ -1,9 +1,9 @@
 require 'bcrypt'
 
-# Provides general helper methods used throughout the ZeroAuth library.
-# @since 0.0.1
-#
 module ZeroAuth
+
+  # Provides general helper methods used throughout the ZeroAuth library.
+  #
   class Utils
 
     # Uses a "constant time" comparison algorithm I would never have thought

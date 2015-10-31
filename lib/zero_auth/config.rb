@@ -1,6 +1,7 @@
-# Holds configuration values for the ZeroAuth library.
-#
 module ZeroAuth
+
+  # Holds configuration values for the ZeroAuth library.
+  #
   class Config
 
     # @return [Integer] The cost param when generating BCrypt passwords.

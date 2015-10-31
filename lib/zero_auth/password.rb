@@ -1,8 +1,8 @@
 require 'bcrypt'
-
-# Provides helper methods for generating and comparing BCrypt passwords
-#
 module ZeroAuth
+
+  # Provides helper methods for generating and comparing BCrypt passwords
+  #
   class Password
 
     # Generates a password salt using `BCrypt::Engine.generate_salt`
